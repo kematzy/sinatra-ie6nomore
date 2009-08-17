@@ -92,6 +92,12 @@ Currently supported localizations are:
 * Swedish (se)
 
 
+== TODOs
+
+* Rake task to harvest all IE6NoMore images and store them on local server.
+* Further localizations
+
+
 == Copyright
 
 Copyright (c) 2009 kematzy. See LICENSE for details.

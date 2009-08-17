@@ -69,11 +69,10 @@ end
 
 desc 'Build the rdoc HTML Files'
 task :docs do
-  if File.exist?('VERSION.yml')
-    config = YAML.load(File.read('VERSION.yml'))
-    version = "#{config[:major]}.#{config[:minor]}.#{config[:patch]}"
+  if File.exist?('VERSION')
+    version = File.read('VERSION')
   else
-    version = ""
+    version = "undefined"
   end
   
   sh "sdoc -N --title 'Sinatra::IE6NoMore v#{version}' lib/sinatra README.rdoc"
