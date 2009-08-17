@@ -37,7 +37,7 @@ fr:
   chrome_url: "http://www.google.com/chrome?hl=fr"
 
 # Portugese
-pt-BR: 
+br: 
   header: "Você está usando um navegador desatualizado"
   sub: "Para navegar melhor neste site, por favor, atualize seu navegador."
   close: "Feche esta observação"
