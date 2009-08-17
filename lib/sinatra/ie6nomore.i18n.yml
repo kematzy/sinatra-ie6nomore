@@ -1,0 +1,206 @@
+## IE6 NO MORE Localizations File
+## 
+## 
+##
+
+# ENGLISH
+en: 
+  header: "You are using an outdated browser"
+  sub: "For a better experience using this site, please upgrade to a modern web browser."
+  close: "Close this notice"
+  get: Get
+  ie_url: "http://www.browserforthebetter.com/download.html"
+  ff_url: "http://getfirefox.com/"
+  safari_url: "http://www.apple.com/safari/download/"
+  chrome_url: "http://www.google.com/chrome"
+
+# SPANISH
+es: 
+  header: "Usted está usando un navegador obsoleto."
+  sub: "Para navegar mejor por este sitio, por favor, actualice su navegador."
+  close: "Cierra este aviso"
+  get: Consiga
+  ie_url: "http://www.microsoft.com/downloads/details.aspx?FamilyID=341c2ad5-8c3d-4347-8c03-08cdecd8852b&DisplayLang=es"
+  ff_url: "http://www.mozilla-europe.org/es/firefox/"
+  safari_url: "http://www.apple.com/es/safari/download/"
+  chrome_url: "http://www.google.com/chrome?hl=es"
+
+# French
+fr: 
+  header: "Vous utilisez un navigateur dépassé depuis près de 8 ans!"
+  sub: "Pour une meilleure expérience web, prenez le temps de mettre votre navigateur à jour."
+  close: "Fermez cette notification"
+  get: Obtenez
+  ie_url: "http://www.microsoft.com/downloads/details.aspx?FamilyID=341c2ad5-8c3d-4347-8c03-08cdecd8852b&DisplayLang=fr"
+  ff_url: "http://fr.www.mozilla.com/fr/"
+  safari_url: "http://www.apple.com/fr/safari/download/"
+  chrome_url: "http://www.google.com/chrome?hl=fr"
+
+# Portugese
+pt-BR: 
+  header: "Você está usando um navegador desatualizado"
+  sub: "Para navegar melhor neste site, por favor, atualize seu navegador."
+  close: "Feche esta observação"
+  get: Obtenha
+  ie_url: "http://www.microsoft.com/downloads/details.aspx?FamilyID=341c2ad5-8c3d-4347-8c03-08cdecd8852b&DisplayLang=pt-br"
+  ff_url: "http://pt-br.www.mozilla.com/pt-BR/"
+  safari_url: "http://www.apple.com/br/safari/download/"
+  chrome_url: "http://www.google.com/chrome?hl=pt-BR"
+
+# Italian
+it: 
+  header: "Stai usando un browser obsoleto"
+  sub: "Per una migliore navigazione su questo sito, per cortesia passa ad un browser di ultima generazione."
+  close: "Chiuda questo avviso"
+  get: Ottenga
+  ie_url: "http://www.microsoft.com/downloads/details.aspx?FamilyID=341c2ad5-8c3d-4347-8c03-08cdecd8852b&DisplayLang=it"
+  ff_url: "http://www.mozilla-europe.org/it/"
+  safari_url: "http://www.apple.com/it/safari/download/"
+  chrome_url: "http://www.google.com/chrome?hl=it"
+
+# Japanese
+jp: 
+  header: ">あなたは旧式ブラウザをご利用中です"
+  sub: "このウェブサイトを快適に閲覧するにはブラウザをアップグレードしてください。"
+  close: "この注意を閉じなさい"
+  get: Get
+  ie_url: "http://www.microsoft.com/downloads/details.aspx?FamilyID=341c2ad5-8c3d-4347-8c03-08cdecd8852b&DisplayLang=ja"
+  ff_url: "http://www.mozilla.jp/"
+  safari_url: "http://www.apple.com/jp/safari/download/"
+  chrome_url: "http://www.google.com/chrome?hl=ja"
+
+# Swedish
+se: 
+  header: "Du använder en föråldrad webbläsare"
+  sub: "För en bättre upplevelse på denna webbplats, vänligen byt till en modern webbläsare."
+  close: "Stäng denna notering"
+  get: "Ladda ner"
+  ie_url: "http://www.microsoft.com/downloads/details.aspx?FamilyID=341c2ad5-8c3d-4347-8c03-08cdecd8852b&DisplayLang=sv-SE"
+  ff_url: "http://sv-se.www.mozilla.com/sv-SE/"
+  safari_url: "http://www.apple.com/se/safari/download/"
+  chrome_url: "http://www.google.com/chrome?hl=sv-SE"
+
+## AWAITING TRANSLATIONS::
+# 
+# # Thai
+# th:
+#   header: ""
+#   sub: ""
+#   close: ""
+#   get: ""
+#   ie_url: ""
+#   ff_url: ""
+#   safari_url: ""
+#   chrome_url: ""
+# 
+# # Chinese
+# ch:
+#   header: ""
+#   sub: ""
+#   close: ""
+#   get: ""
+#   ie_url: ""
+#   ff_url: ""
+#   safari_url: ""
+#   chrome_url: ""
+# 
+# # Hungarian
+# hu:
+#   header: ""
+#   sub: ""
+#   close: ""
+#   get: ""
+#   ie_url: ""
+#   ff_url: ""
+#   safari_url: ""
+#   chrome_url: ""
+# 
+# # Dutch
+# nl:
+#   header: ""
+#   sub: ""
+#   close: ""
+#   get: ""
+#   ie_url: ""
+#   ff_url: ""
+#   safari_url: ""
+#   chrome_url: ""
+# 
+# # Polish
+# po:
+#   header: ""
+#   sub: ""
+#   close: ""
+#   get: ""
+#   ie_url: ""
+#   ff_url: ""
+#   safari_url: ""
+#   chrome_url: ""
+# 
+# # Danish
+# da:
+#   header: ""
+#   sub: ""
+#   close: ""
+#   get: ""
+#   ie_url: ""
+#   ff_url: ""
+#   safari_url: ""
+#   chrome_url: ""
+# 
+# # German
+# de:
+#   header: ""
+#   sub: ""
+#   close: ""
+#   get: ""
+#   ie_url: ""
+#   ff_url: ""
+#   safari_url: ""
+#   chrome_url: ""
+# 
+# # Russian
+# ru:
+#   header: ""
+#   sub: ""
+#   close: ""
+#   get: ""
+#   ie_url: ""
+#   ff_url: ""
+#   safari_url: ""
+#   chrome_url: ""
+# 
+# # Arabic 
+# arabic:
+#   header: ""
+#   sub: ""
+#   close: ""
+#   get: ""
+#   ie_url: ""
+#   ff_url: ""
+#   safari_url: ""
+#   chrome_url: ""
+# 
+# # Farsi
+# farsi:
+#   header: ""
+#   sub: ""
+#   close: ""
+#   get: ""
+#   ie_url: ""
+#   ff_url: ""
+#   safari_url: ""
+#   chrome_url: ""
+# 
+# # Hebrew
+# he:
+#   header: ""
+#   sub: ""
+#   close: ""
+#   get: ""
+#   ie_url: ""
+#   ff_url: ""
+#   safari_url: ""
+#   chrome_url: ""
+# 
+
