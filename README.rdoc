@@ -1,6 +1,96 @@
-= sinatra-ie6nomore
+= Sinatra::IE6NoMore Extension
 
-Description goes here.
+A simple extension in support of the {"IE6 No More"}[www.ie6nomore.com] campaign to rid the world of
+the nasty bug ridden monstrosity called IE6.
+
+Check the {"IE6 No More"}[www.ie6nomore.com] site for more information.
+
+=== Install
+
+
+  sudo gem install kematzy-sinatra-ie6nomore
+
+=== Usage 
+
+Three steps
+
+==== Step 1
+
+Require the Sinatra::IE6NoMore gem
+
+  require 'sinatra/base'
+  
+  require 'sinatra/ie6nomore'
+
+==== Step 2
+
+Include in your app.
+
+  class MyApp < Sinatra::Application
+    
+    helpers Sinatra::IE6NoMore
+    
+    <snip...>
+    
+  end
+
+
+==== Step 3
+
+Add this to your <tt>/views/layout.erb</tt> file.
+
+  <html>
+    <body>
+      
+      <%= ie6nomore %>
+      
+    </body>
+  </html>
+
+And in your HTML you'll see an output like this:
+
+    <!--[if lt IE 7]>
+    <div style="border: 1px solid #F7941D; background: #FEEFDA; text-align: center; clear: both; height: 75px; position: relative;">
+     <div style="position: absolute; right: 3px; top: 3px; font-family: courier new; font-weight: bold;"><a href="#" onclick="javascript:this.parentNode.parentNode.style.display="none"; return false;"><img src="http://www.ie6nomore.com/files/theme/ie6nomore-cornerx.jpg" style="border: none;" alt="Close this notice"/></a></div>
+      <div style="width: 640px; margin: 0 auto; text-align: left; padding: 0; overflow: hidden; color: black;">
+       <div style="width: 75px; float: left;"><img src="http://www.ie6nomore.com/files/theme/ie6nomore-warning.jpg" alt="Warning!"/></div>
+       <div style="width: 275px; float: left; font-family: Arial, sans-serif;">
+       <div style="font-size: 14px; font-weight: bold; margin-top: 12px;">You are using an outdated browser</div>
+       <div style="font-size: 12px; margin-top: 6px; line-height: 12px;">For a better experience using this site, please upgrade to a modern web browser.</div>
+      </div>
+      <div style="width: 75px; float: left;"><a href="http://getfirefox.com/" target="_blank"><img src="http://www.ie6nomore.com/files/theme/ie6nomore-firefox.jpg" style="border: none;" alt="Get Firefox 3.5"/></a></div>
+      <div style="width: 75px; float: left;"><a href="http://www.browserforthebetter.com/download.html" target="_blank"><img src="http://www.ie6nomore.com/files/theme/ie6nomore-ie8.jpg" style="border: none;" alt="Get Internet Explorer 8"/></a></div>
+      <div style="width: 73px; float: left;"><a href="http://www.apple.com/safari/download/" target="_blank"><img src="http://www.ie6nomore.com/files/theme/ie6nomore-safari.jpg" style="border: none;" alt="Get Safari 4"/></a></div>
+      <div style="float: left;"><a href="http://www.google.com/chrome" target="_blank"><img src="http://www.ie6nomore.com/files/theme/ie6nomore-chrome.jpg" style="border: none;" alt="Get Google Chrome"/></a></div>
+     </div>
+    </div>
+    <![endif]-->
+
+
+=== Configuration Options
+
+* <tt>:locale</tt>   =>  Locale (Default = :en)
+
+* <tt>:img_host</tt>  =>  The URL to the ie6nomore images (Default = http://www.ie6nomore.com/files/theme). <b>NB!</b> No trailing slash
+
+* <tt>:border</tt>  =>  The div border color. (Default = "1px solid #F7941D")
+
+* <tt>:background</tt>  =>  The div background color. (Default = "#FEEFDA")
+
+* <tt>:text_color</tt>  =>  The div text color. (Default = "black")
+
+=== Localizations
+
+Currently supported localizations are:
+
+* English  (en)
+* Spanish (es)
+* French (fr)
+* Portugese (br)
+* Italian (it)
+* Japanese (jp)
+* Swedish (se)
+
 
 == Copyright
 
