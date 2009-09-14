@@ -77,7 +77,7 @@ module Sinatra
   # 
   module IE6NoMore
     
-    VERSION = '0.1.0' unless const_defined?(:VERSION)
+    VERSION = '0.1.1' unless const_defined?(:VERSION)
     def self.version; "Sinatra::IE6NoMore v#{VERSION}"; end
       
     ##
