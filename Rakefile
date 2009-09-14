@@ -9,7 +9,7 @@ begin
     gem.email = "kematzy@gmail.com"
     gem.homepage = "http://github.com/kematzy/sinatra-ie6nomore"
     gem.authors = ["kematzy"]
-    gem.add_dependency('sinatra', '>= 0.9.2')
+    gem.add_dependency('sinatra', '>= 0.9.4')
     gem.add_development_dependency('spec', '>= 1.2.7')
     gem.add_development_dependency('rspec_hpricot_matchers', '>= 1.0.0')
     
@@ -54,26 +54,17 @@ task :default => :spec
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
-  if File.exist?('VERSION.yml')
-    config = YAML.load(File.read('VERSION.yml'))
-    version = "#{config[:major]}.#{config[:minor]}.#{config[:patch]}"
-  else
-    version = ""
-  end
+  version = File.exist?('VERSION') ? IO.read('VERSION').chomp : "[Unknown]" 
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "sinatra-ie6nomore #{version}"
+  rdoc.title = "Sinatra::IE6NoMore v#{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
 desc 'Build the rdoc HTML Files'
 task :docs do
-  if File.exist?('VERSION')
-    version = File.read('VERSION')
-  else
-    version = "undefined"
-  end
+  version = File.exist?('VERSION') ? IO.read('VERSION').chomp : "[Unknown]" 
   
   sh "sdoc -N --title 'Sinatra::IE6NoMore v#{version}' lib/sinatra README.rdoc"
 end
