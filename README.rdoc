@@ -5,16 +5,16 @@ the nasty bug ridden monstrosity called IE6.
 
 Check the {"IE6 No More"}[www.ie6nomore.com] site for more information.
 
-=== Install
+== Install
 
 
   sudo gem install kematzy-sinatra-ie6nomore
 
-=== Usage 
+== Usage 
 
 Three steps
 
-==== Step 1
+=== Step 1
 
 Require the Sinatra::IE6NoMore gem
 
@@ -22,7 +22,7 @@ Require the Sinatra::IE6NoMore gem
   
   require 'sinatra/ie6nomore'
 
-==== Step 2
+=== Step 2
 
 Include in your app.
 
@@ -35,7 +35,7 @@ Include in your app.
   end
 
 
-==== Step 3
+=== Step 3
 
 Add this to your <tt>/views/layout.erb</tt> file.
 
@@ -67,7 +67,7 @@ And in your HTML you'll see an output like this:
     <![endif]-->
 
 
-=== Configuration Options
+== Configuration Options
 
 * <tt>:locale</tt>   =>  Locale (Default = :en)
 
@@ -81,7 +81,7 @@ And in your HTML you'll see an output like this:
 
 * <tt>:debug</tt>  =>  Whether to encapsulate the code with IE Comments or not. So you can see how it looks like when developing on NON-IE 6 browsers. (Default = false)
 
-=== Localizations
+== Localizations
 
 Currently supported localizations are:
 
@@ -94,7 +94,7 @@ Currently supported localizations are:
 * Swedish (se)
 
 
-=== Development Use
+== Development Use
 
 When you are developing a Non-IE6 site, you might want to check how the site looks like with the IE6NoMore 
 banner.
