@@ -42,7 +42,7 @@ Add this to your <tt>/views/layout.erb</tt> file.
   <html>
     <body>
       
-      <%= ie6nomore %>
+      <%= ie6_no_more %>
       
     </body>
   </html>
@@ -79,6 +79,8 @@ And in your HTML you'll see an output like this:
 
 * <tt>:text_color</tt>  =>  The div text color. (Default = "black")
 
+* <tt>:debug</tt>  =>  Whether to encapsulate the code with IE Comments or not. So you can see how it looks like when developing on NON-IE 6 browsers. (Default = false)
+
 === Localizations
 
 Currently supported localizations are:
@@ -90,6 +92,20 @@ Currently supported localizations are:
 * Italian (it)
 * Japanese (jp)
 * Swedish (se)
+
+
+=== Development Use
+
+When you are developing a Non-IE6 site, you might want to check how the site looks like with the IE6NoMore 
+banner.
+
+  <html>
+    <body>
+    
+      <%= ie6_no_more(:debug => true) %>
+    
+    </body>
+  </html>
 
 
 == TODOs

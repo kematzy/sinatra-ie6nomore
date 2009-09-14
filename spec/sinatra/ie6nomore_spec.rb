@@ -86,6 +86,15 @@ describe "Sinatra" do
           @markup.should have_tag('img[@src=http://example.com/images/ie6nomore-cornerx.jpg]')
         end
         
+        it "should show the HTML without IE comments when :debug => true " do
+          erb_app %Q[<%= ie6_no_more(:debug => true ) %>]
+          markup = last_response.body
+          # markup.should have_tag('debug')
+          markup.should_not match(/<!--\[if lt IE 7\]/)
+          markup.should_not match(/<!\[endif\]-->$/)
+          
+        end
+        
       end #/ with options
       
       

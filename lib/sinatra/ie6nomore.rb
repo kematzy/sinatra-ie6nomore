@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'yaml'
 
 module Sinatra
-
+  
   # = Sinatra::IE6NoMore Extension
   # 
   # A simple extension in support of the IE6 No More[www.ie6nomore.com] campaign to rid the world of
@@ -47,7 +47,7 @@ module Sinatra
   #   <html>
   #     <body>
   #       
-  #       <%= ie6nomore %>
+  #       <%= ie6_no_more %>
   #       
   #     </body>
   #   </html>
@@ -91,6 +91,7 @@ module Sinatra
     #   * <tt>:border</tt>  =>  The div border color. (Default = "1px solid #F7941D")
     #   * <tt>:background</tt>  =>  The div background color. (Default = "#FEEFDA")
     #   * <tt>:text_color</tt>  =>  The div text color. (Default = "black")
+    #   * <tt>:debug</tt>  =>  Whether to encapsulate the code with the IE Comments or not. (Default = false)
     #  
     # ==== Examples
     # 
@@ -101,6 +102,10 @@ module Sinatra
     #   ie6_no_more(:border => "2px dashed green", :background => 'black', :text_color => 'white' ) 
     #     => different color scheme for text, border & background colors
     # 
+    # To see how it looks like when developing on a NON-IE 6 browsers.
+    # 
+    #   ie6_no_more(:debug => true)  => removes the encapsulating IE comments.
+    # 
     # @api public
     def ie6_no_more(options = {})
       o = {
@@ -109,13 +114,15 @@ module Sinatra
         :border => "1px solid #F7941D", 
         :background => "#FEEFDA", 
         :text_color => "black", 
+        :debug => false 
       }.merge(options)
       
       localizations = load_i18n
       # set the localisation 
       i18n = localizations[o[:locale].to_s]
       
-      html = %Q[<!--[if lt IE 7]>\n]
+      html = '' 
+      html << %Q[<!--[if lt IE 7]>\n] unless o[:debug] # == true
       html << %Q[<div style="border: #{o[:border]}; background: #{o[:background]}; text-align: center; clear: both; height: 75px; position: relative;">\n]
       html << %Q[ <div style="position: absolute; right: 3px; top: 3px; font-family: courier new; font-weight: bold;"><a href="#" onclick="javascript:this.parentNode.parentNode.style.display="none"; return false;"><img src="#{o[:img_host]}/ie6nomore-cornerx.jpg" style="border: none;" alt="#{i18n['close']}"/></a></div>\n]
       html << %Q[  <div style="width: 640px; margin: 0 auto; text-align: left; padding: 0; overflow: hidden; color: #{o[:text_color]};">\n]
@@ -129,11 +136,11 @@ module Sinatra
       html << %Q[  <div style="width: 73px; float: left;"><a href="#{i18n['safari_url']}" target="_blank"><img src="#{o[:img_host]}/ie6nomore-safari.jpg" style="border: none;" alt="#{i18n['get']} Safari 4"/></a></div>\n]
       html << %Q[  <div style="float: left;"><a href="#{i18n['chrome_url']}" target="_blank"><img src="#{o[:img_host]}/ie6nomore-chrome.jpg" style="border: none;" alt="#{i18n['get']} Google Chrome"/></a></div>\n]
       html << %Q[ </div>\n]
-      html << %Q[</div>\n<![endif]-->\n]
+      html << %Q[</div>\n]
+      html << %Q[<![endif]-->\n] unless o[:debug] # == true
       html
     end
     
-
     private
       
       ##
