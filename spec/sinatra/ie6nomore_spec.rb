@@ -2,61 +2,69 @@ require "#{File.dirname(File.dirname(File.expand_path(__FILE__)))}/spec_helper"
 
 describe "Sinatra" do 
   
+  def remove_enclosing_html_comments(markup)
+    return markup.sub('<!--[if lt IE 7]>', '').sub('<![endif]-->','')
+  end
+  
   describe "IE6NoMore" do 
     
-    def remove_enclosing_html_comments(markup)
-      return markup.sub('<!--[if lt IE 7]>', '').sub('<![endif]-->','')
+    class MyTestApp
+      register(Sinatra::IE6NoMore)
     end
     
-    describe "ie6_no_more" do 
+    # convenience shared spec that sets up MyTestApp and tests it's OK,
+    # without it you will get "stack level too deep" errors
+    it_should_behave_like "MyTestApp"
+    
+    describe "#self.gem_root_path" do 
+      
+      it "should return the full path to the gem" do 
+        Sinatra::IE6NoMore.gem_root_path.should == File.expand_path(File.join(File.dirname(__FILE__), '..','..'))
+      end
+      
+    end #/ #self.gem_root_path
+    
+    describe "#ie6_no_more" do 
       
       describe "with defaults" do 
         
         it "should return the expected HTML" do 
           erb_app %Q[<%= ie6_no_more %>]
-          markup = last_response.body
-          # markup.should have_tag('debug')
+          
           # test the comments first before removing
-          markup.should match(/<!--\[if lt IE 7\]/)
-          markup.should match(/<!\[endif\]-->$/)
+          body.should match(/<!--\[if lt IE 7\]/)
+          body.should match(/<!\[endif\]-->$/)
           
           # remove the comments so we can test the code output
-          markup = remove_enclosing_html_comments(markup)
-          # markup.should have_tag('debug')
-          
+          markup = remove_enclosing_html_comments(body)
           # we get the border and background through OK
           markup.should match(/<div style="border: 1px solid #F7941D; background: #FEEFDA;/)
-          
           # we have a warning image
           markup.should have_tag('div[@style=width: 75px; float: left;] > img') do |img|
-            img.attributes['src'].should == 'http://www.ie6nomore.com/files/theme/ie6nomore-warning.jpg'
+            img.attributes['src'].should == '/images/ie6nomore/ie6nomore-warning.jpg'
           end
-          
-          markup.should have_tag('img[@src=http://www.ie6nomore.com/files/theme/ie6nomore-cornerx.jpg]')
-          
+          markup.should have_tag('img[@src=/images/ie6nomore/ie6nomore-cornerx.jpg]')
           # text
           markup.should have_tag('img[@alt=Close this notice]')
           markup.should have_tag('div[@style=font-size: 14px; font-weight: bold; margin-top: 12px;]','You are using an outdated browser')
           markup.should have_tag('div[@style=font-size: 12px; margin-top: 6px; line-height: 12px;]','For a better experience using this site, please upgrade to a modern web browser.')
-          
           # browsers
           markup.should have_tag('div > a[@href=http://getfirefox.com/] > img') do |img|
-            img.attributes['src'].should == 'http://www.ie6nomore.com/files/theme/ie6nomore-firefox.jpg'
+            img.attributes['src'].should == '/images/ie6nomore/ie6nomore-firefox.jpg'
             img.attributes['alt'].should == 'Get Firefox 3.5'
           end
           markup.should have_tag('div > a[@href=http://www.browserforthebetter.com/download.html] > img') do |img|
-            img.attributes['src'].should == 'http://www.ie6nomore.com/files/theme/ie6nomore-ie8.jpg'
+            img.attributes['src'].should == '/images/ie6nomore/ie6nomore-ie8.jpg'
             img.attributes['alt'].should == 'Get Internet Explorer 8'
           end
           markup.should have_tag('div > a[@href=http://www.apple.com/safari/download/] > img') do |img|
-            img.attributes['src'].should == 'http://www.ie6nomore.com/files/theme/ie6nomore-safari.jpg'
+            img.attributes['src'].should == '/images/ie6nomore/ie6nomore-safari.jpg'
             img.attributes['alt'].should == 'Get Safari 4'
           end
           markup.should have_tag('div > a[@href=http://www.google.com/chrome] > img') do |img|
-            img.attributes['src'].should == 'http://www.ie6nomore.com/files/theme/ie6nomore-chrome.jpg'
+            img.attributes['src'].should == '/images/ie6nomore/ie6nomore-chrome.jpg'
             img.attributes['alt'].should == 'Get Google Chrome'
           end
-          
         end
         
       end #/ with defaults
@@ -64,10 +72,9 @@ describe "Sinatra" do
       describe "with options" do 
         
         before(:each) do 
-          erb_app %Q[<%= ie6_no_more(:img_host => "http://example.com/images", :background => 'yellow', :border => '10px dashed #fff', :text_color => 'red' ) %>]
+          erb_app %Q[<%= ie6_no_more(:img_host => "http://example.com/images/", :background => 'yellow', :border => '10px dashed #fff', :text_color => 'red' ) %>]
           # remove the comments so we can test the code output
           @markup = remove_enclosing_html_comments(last_response.body)
-          # @markup.should have_tag('debug')
         end
         
         it "should set the border style attribute" do 
@@ -86,17 +93,14 @@ describe "Sinatra" do
           @markup.should have_tag('img[@src=http://example.com/images/ie6nomore-cornerx.jpg]')
         end
         
-        it "should show the HTML without IE comments when :debug => true " do
+        it "should show the HTML without IE comments when :debug => true " do 
           erb_app %Q[<%= ie6_no_more(:debug => true ) %>]
           markup = last_response.body
-          # markup.should have_tag('debug')
-          markup.should_not match(/<!--\[if lt IE 7\]/)
-          markup.should_not match(/<!\[endif\]-->$/)
-          
+          body.should_not match(/<!--\[if lt IE 7\]/)
+          body.should_not match(/<!\[endif\]-->$/)
         end
         
       end #/ with options
-      
       
       describe "with localizations" do 
         
@@ -104,7 +108,6 @@ describe "Sinatra" do
           erb_app %Q[<%= ie6_no_more(:locale => :es ) %>]
           # remove the comments so we can test the code output
           markup = remove_enclosing_html_comments(last_response.body)
-          # markup.should have_tag('debug')
           
           # text
           markup.should have_tag('img[@alt=Cierra este aviso]')
@@ -113,19 +116,15 @@ describe "Sinatra" do
           
           # browsers
           markup.should have_tag('div > a[@href=http://www.mozilla-europe.org/es/firefox/] > img') do |img|
-            img.attributes['src'].should == 'http://www.ie6nomore.com/files/theme/ie6nomore-firefox.jpg'
             img.attributes['alt'].should == 'Consiga Firefox 3.5'
           end
           markup.should have_tag('div > a[@href=http://www.microsoft.com/downloads/details.aspx?FamilyID=341c2ad5-8c3d-4347-8c03-08cdecd8852b&DisplayLang=es] > img') do |img|
-            img.attributes['src'].should == 'http://www.ie6nomore.com/files/theme/ie6nomore-ie8.jpg'
             img.attributes['alt'].should == 'Consiga Internet Explorer 8'
           end
           markup.should have_tag('div > a[@href=http://www.apple.com/es/safari/download/] > img') do |img|
-            img.attributes['src'].should == 'http://www.ie6nomore.com/files/theme/ie6nomore-safari.jpg'
             img.attributes['alt'].should == 'Consiga Safari 4'
           end
           markup.should have_tag('div > a[@href=http://www.google.com/chrome?hl=es] > img') do |img|
-            img.attributes['src'].should == 'http://www.ie6nomore.com/files/theme/ie6nomore-chrome.jpg'
             img.attributes['alt'].should == 'Consiga Google Chrome'
           end
         end
@@ -134,7 +133,6 @@ describe "Sinatra" do
           erb_app %Q[<%= ie6_no_more(:locale => :fr ) %>]
           # remove the comments so we can test the code output
           markup = remove_enclosing_html_comments(last_response.body)
-          # markup.should have_tag('debug')
           
           # text
           markup.should have_tag('img[@alt=Fermez cette notification]')
@@ -270,7 +268,7 @@ describe "Sinatra" do
     
     describe "#load_i18n" do 
       
-      module Sinatra::IE6NoMore
+      module Sinatra::IE6NoMore::Helpers 
         public :load_i18n
       end
       
@@ -278,11 +276,23 @@ describe "Sinatra" do
         app.load_i18n.should be_a_kind_of(Hash)
       end
       
-      it "should have further tests" do
+      it "should have further tests" do 
         pending "energy and time to fix this...."
       end
       
     end #/ #load_i18n
+    
+    describe "Rake Tasks" do 
+      
+      describe "rake ie6nomore:copy_images" do 
+        
+        it "should copy the images from the gem root to the app/public/images/ie6nomore directory" do 
+          pending "TODO: need to work out how to test this functionality"
+        end
+        
+      end #/ rake ie6nomore:copy_images
+      
+    end #/ Rake Tasks
     
   end #/ IE6NoMore
   
