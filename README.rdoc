@@ -112,8 +112,8 @@ You can easily customize the output through the following parameters passed to t
 
 * <tt>:locale</tt>   =>  Sets the locale for the output. (Default = :en => English)
 
-* <tt>:img_host</tt>  =>  The URL to the ie6nomore images (Default = /images/ie6nomore). 
-  <b>NB!</b> No trailing slash
+* <tt>:img_host</tt>  =>  The URL to the ie6nomore images (Default = /images/ie6nomore/). 
+  <b>NB!</b> with trailing slash
 
 * <tt>:border</tt>  =>  The div border color. (Default = "1px solid #F7941D")
 
