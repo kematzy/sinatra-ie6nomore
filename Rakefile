@@ -5,7 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "sinatra-ie6nomore"
-    gem.summary = %Q{'IE6 No More' Sinatra Extension to make the eradication of IE6 easier}
+    gem.summary = %Q{A Sinatra Extension that shows an 'IE6 No More' div on the page for IE6 browsers, making the eradication of IE6 easier.}
+    gem.description = %Q{A Sinatra Extension that shows an 'IE6 No More' div on the page for IE6 browsers, making the eradication of IE6 easier.}
     gem.email = "kematzy@gmail.com"
     gem.homepage = "http://github.com/kematzy/sinatra-ie6nomore"
     gem.authors = ["kematzy"]
@@ -15,30 +16,32 @@ begin
     
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
-
+  Jeweler::GemcutterTasks.new
 rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
+  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
 
 require 'spec/rake/spectask'
 Spec::Rake::SpecTask.new(:spec) do |spec|
   spec.libs << 'lib' << 'spec'
+  spec.spec_opts = ["--color", "--format", "specdoc", "--require", "spec/spec_helper.rb"]  
   spec.spec_files = FileList['spec/**/*_spec.rb']
 end
 
 Spec::Rake::SpecTask.new(:rcov) do |spec|
   spec.libs << 'lib' << 'spec'
+  spec.spec_opts = ["--color", "--format", "specdoc", "--require", "spec/spec_helper.rb"]  
   spec.pattern = 'spec/**/*_spec.rb'
   spec.rcov = true
 end
 
 
 namespace :spec do
-
-  desc "Run all specifications verbosely"
-  Spec::Rake::SpecTask.new(:verbose) do |t|
+  
+  desc "Run all specifications quietly"
+  Spec::Rake::SpecTask.new(:quiet) do |t|
     t.libs << "lib"
-    t.spec_opts = ["--color", "--format", "specdoc", "--require", "spec/spec_helper.rb"]
+    t.spec_opts = ["--color", "--require", "spec/spec_helper.rb"]
   end
   
   desc "Run specific spec verbosely (SPEC=/path/2/file)"
@@ -49,6 +52,8 @@ namespace :spec do
   end
   
 end
+
+task :spec => :check_dependencies
 
 task :default => :spec
 
@@ -85,6 +90,3 @@ namespace :docs do
   end
   
 end
-
-
-
