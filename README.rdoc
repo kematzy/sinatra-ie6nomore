@@ -38,15 +38,11 @@ To use this extension in your App just follow these two simple steps:
   require 'sinatra/ie6nomore'
   
   class YourApp < Sinatra::Base
-    
     helpers Sinatra::IE6NoMore::Helpers
-    
     # or
-    
     register(Sinatra::IE6NoMore)
     
     <snip...>
-    
   end
 
 === Step 2
@@ -58,27 +54,53 @@ Add this to your <tt>../views/layout.erb</tt> file.
       
       <%= ie6_no_more %>
       
-    </body>
-  </html>
+      <snip...>
+      
 
 And in your HTML you'll see some output like this:
 
-    <!--[if lt IE 7]>
-    <div style="border: 1px solid #F7941D; background: #FEEFDA; text-align: center; clear: both; height: 75px; position: relative;">
-     <div style="position: absolute; right: 3px; top: 3px; font-family: courier new; font-weight: bold;"><a href="#" onclick="javascript:this.parentNode.parentNode.style.display="none"; return false;"><img src="/images/ie6nomore/ie6nomore-cornerx.jpg" style="border: none;" alt="Close this notice"/></a></div>
-      <div style="width: 640px; margin: 0 auto; text-align: left; padding: 0; overflow: hidden; color: black;">
-       <div style="width: 75px; float: left;"><img src="/images/ie6nomore/ie6nomore-warning.jpg" alt="Warning!"/></div>
-       <div style="width: 275px; float: left; font-family: Arial, sans-serif;">
-       <div style="font-size: 14px; font-weight: bold; margin-top: 12px;">You are using an outdated browser</div>
-       <div style="font-size: 12px; margin-top: 6px; line-height: 12px;">For a better experience using this site, please upgrade to a modern web browser.</div>
-      </div>
-      <div style="width: 75px; float: left;"><a href="http://getfirefox.com/" target="_blank"><img src="/images/ie6nomore/ie6nomore-firefox.jpg" style="border: none;" alt="Get Firefox 3.5"/></a></div>
-      <div style="width: 75px; float: left;"><a href="http://www.browserforthebetter.com/download.html" target="_blank"><img src="/images/ie6nomore/ie6nomore-ie8.jpg" style="border: none;" alt="Get Internet Explorer 8"/></a></div>
-      <div style="width: 73px; float: left;"><a href="http://www.apple.com/safari/download/" target="_blank"><img src="/images/ie6nomore/ie6nomore-safari.jpg" style="border: none;" alt="Get Safari 4"/></a></div>
-      <div style="float: left;"><a href="http://www.google.com/chrome" target="_blank"><img src="/images/ie6nomore/ie6nomore-chrome.jpg" style="border: none;" alt="Get Google Chrome"/></a></div>
-     </div>
+  <!--[if lt IE 7]>
+  <div style="border: 1px solid #F7941D; background: #FEEFDA; text-align: center; clear: both; height: 75px; position: relative;">
+    <div style="position: absolute; right: 3px; top: 3px; font-family: courier new; font-weight: bold;">
+      <a href="#" onclick="javascript:this.parentNode.parentNode.style.display="none"; return false;">
+        <img src="/images/ie6nomore/ie6nomore-cornerx.jpg" style="border: none;" alt="Close this notice"/>
+      </a>
     </div>
-    <![endif]-->
+    <div style="width: 640px; margin: 0 auto; text-align: left; padding: 0; overflow: hidden; color: black;">
+      <div style="width: 75px; float: left;">
+        <img src="/images/ie6nomore/ie6nomore-warning.jpg" alt="Warning!"/>
+      </div>
+      <div style="width: 275px; float: left; font-family: Arial, sans-serif;">
+        <div style="font-size: 14px; font-weight: bold; margin-top: 12px;">
+          You are using an outdated browser
+        </div>
+        <div style="font-size: 12px; margin-top: 6px; line-height: 12px;">
+          For a better experience using this site, please upgrade to a modern web browser.</div>
+        </div>
+        <div style="width: 75px; float: left;">
+          <a href="http://getfirefox.com/" target="_blank">
+            <img src="/images/ie6nomore/ie6nomore-firefox.jpg" style="border: none;" alt="Get Firefox 3.5"/>
+          </a>
+        </div>
+        <div style="width: 75px; float: left;">
+          <a href="http://www.browserforthebetter.com/download.html" target="_blank">
+            <img src="/images/ie6nomore/ie6nomore-ie8.jpg" style="border: none;" alt="Get Internet Explorer 8"/>
+          </a>
+        </div>
+        <div style="width: 73px; float: left;">
+          <a href="http://www.apple.com/safari/download/" target="_blank">
+            <img src="/images/ie6nomore/ie6nomore-safari.jpg" style="border: none;" alt="Get Safari 4"/>
+          </a>
+        </div>
+        <div style="float: left;">
+          <a href="http://www.google.com/chrome" target="_blank">
+            <img src="/images/ie6nomore/ie6nomore-chrome.jpg" style="border: none;" alt="Get Google Chrome"/>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <![endif]-->
 
 
 That's what it does in a nutshell.
