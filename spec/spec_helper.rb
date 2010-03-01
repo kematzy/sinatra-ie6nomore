@@ -1,50 +1,57 @@
-require 'rubygems'
-require 'spec'
-require 'spec/interop/test'
-require 'rack/test'
-require 'rspec_hpricot_matchers'
+
+::APP_ROOT = "#{File.dirname(File.expand_path(__FILE__))}/fixtures" 
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'sinatra/ie6nomore'
+
+ENV['RACK_ENV'] = 'test'
+
+#--
+# DEPENDENCIES
+#++
+%w( 
+sinatra/base 
+).each {|lib| require lib }
+
+#--
+## SINATRA EXTENSIONS
+#++
+%w(
+sinatra/tests
+sinatra/ie6nomore
+).each {|ext| require ext }
+
 
 Spec::Runner.configure do |config|
   config.include RspecHpricotMatchers
+  config.include Sinatra::Tests::TestCase
+  config.include Sinatra::Tests::RSpec::SharedSpecs
+end
+
+
+# quick convenience methods..
+
+def fixtures_path 
+  "#{File.dirname(File.expand_path(__FILE__))}/fixtures"
+end
+
+def public_fixtures_path 
+  "#{fixtures_path}/public"
 end
 
 class MyTestApp < Sinatra::Base 
   
-  helpers Sinatra::IE6NoMore
+  set :app_dir, "#{APP_ROOT}/app"
+  set :public, "#{fixtures_path}/public"
+  set :views, "#{app_dir}/views"
   
-  get '/tests' do
-    case params[:engine]
-    when 'erb'
-      erb(params[:view], :layout => params[:layout] )
-    when 'haml'
-      haml(params[:view], :layout => params[:layout] )
-    else
-      params.inspect
-    end
-  end
+  register(Sinatra::Tests)
+  
+  enable :raise_errors
   
 end #/class MyTestApp
 
 
-
 class Test::Unit::TestCase
-  include Rack::Test::Methods
-  
-  def setup
-    Sinatra::Base.set :environment, :test
-  end
-  
-  def app
-    MyTestApp.new
-  end
-  
-  def erb_app(view, options = {})
-    options = {:layout => '<%= yield %>', :url  => '/tests' }.merge(options)
-    get options[:url], :view => view, :layout => options[:layout], :engine => :erb 
-  end
-  
+  Sinatra::Base.set :environment, :test
 end
