@@ -229,24 +229,28 @@ module Sinatra
         # set the localisation 
         i18n = localizations[o[:locale].to_s]
         
-        html = '' 
-        html << %Q[<!--[if lt IE 7]>\n] unless o[:debug] # == true
-        html << %Q[<div style="border: #{o[:border]}; background: #{o[:background]}; text-align: center; clear: both; height: 75px; position: relative;">\n]
-        html << %Q[ <div style="position: absolute; right: 3px; top: 3px; font-family: courier new; font-weight: bold;"><a href="#" onclick="javascript:this.parentNode.parentNode.style.display='none'; return false;"><img src="#{o[:img_host]}ie6nomore-cornerx.jpg" style="border: none;" alt="#{i18n['close']}"/></a></div>\n]
-        html << %Q[  <div style="width: 640px; margin: 0 auto; text-align: left; padding: 0; overflow: hidden; color: #{o[:text_color]};">\n]
-        html << %Q[   <div style="width: 75px; float: left;"><img src="#{o[:img_host]}ie6nomore-warning.jpg" alt="Warning!"/></div>\n]
-        html << %Q[   <div style="width: 275px; float: left; font-family: Arial, sans-serif;">\n]
-        html << %Q[   <div style="font-size: 14px; font-weight: bold; margin-top: 12px;">#{i18n['header']}</div>\n]
-        html << %Q[   <div style="font-size: 12px; margin-top: 6px; line-height: 12px;">#{i18n['sub']}</div>\n]
-        html << %Q[  </div>\n]
-        html << %Q[  <div style="width: 75px; float: left;"><a href="#{i18n['ff_url']}" target="_blank"><img src="#{o[:img_host]}ie6nomore-firefox.jpg" style="border: none;" alt="#{i18n['get']} Firefox 3.5"/></a></div>\n]
-        html << %Q[  <div style="width: 75px; float: left;"><a href="#{i18n['ie_url']}" target="_blank"><img src="#{o[:img_host]}ie6nomore-ie8.jpg" style="border: none;" alt="#{i18n['get']} Internet Explorer 8"/></a></div>\n]
-        html << %Q[  <div style="width: 73px; float: left;"><a href="#{i18n['safari_url']}" target="_blank"><img src="#{o[:img_host]}ie6nomore-safari.jpg" style="border: none;" alt="#{i18n['get']} Safari 4"/></a></div>\n]
-        html << %Q[  <div style="float: left;"><a href="#{i18n['chrome_url']}" target="_blank"><img src="#{o[:img_host]}ie6nomore-chrome.jpg" style="border: none;" alt="#{i18n['get']} Google Chrome"/></a></div>\n]
-        html << %Q[ </div>\n]
-        html << %Q[</div>\n]
-        html << %Q[<![endif]-->\n] unless o[:debug] # == true
-        html
+        start_tag = o[:debug] ? "<!-- DEBUG [if lt IE 7] -->" :  "<!--[if lt IE 7]>"
+        close_tag = o[:debug] ? "<!-- DEBUG [endif] -->" : "<![endif]-->"
+        
+        (<<-CODE).gsub(/^ {4}/, '')
+        
+        #{start_tag}
+        <div style="border: #{o[:border]}; background: #{o[:background]}; text-align: center; clear: both; height: 75px; position: relative;">
+         <div style="position: absolute; right: 3px; top: 3px; font-family: courier new; font-weight: bold;"><a href="#" onclick="javascript:this.parentNode.parentNode.style.display='none'; return false;"><img src="#{o[:img_host]}ie6nomore-cornerx.jpg" style="border: none;" alt="#{i18n['close']}"/></a></div>
+          <div style="width: 640px; margin: 0 auto; text-align: left; padding: 0; overflow: hidden; color: #{o[:text_color]};">
+           <div style="width: 75px; float: left;"><img src="#{o[:img_host]}ie6nomore-warning.jpg" alt="Warning!"/></div>
+           <div style="width: 275px; float: left; font-family: Arial, sans-serif;">
+           <div style="font-size: 14px; font-weight: bold; margin-top: 12px;">#{i18n['header']}</div>
+           <div style="font-size: 12px; margin-top: 6px; line-height: 12px;">#{i18n['sub']}</div>
+          </div>
+          <div style="width: 75px; float: left;"><a href="#{i18n['ff_url']}" target="_blank"><img src="#{o[:img_host]}ie6nomore-firefox.jpg" style="border: none;" alt="#{i18n['get']} Firefox 3.5"/></a></div>
+          <div style="width: 75px; float: left;"><a href="#{i18n['ie_url']}" target="_blank"><img src="#{o[:img_host]}ie6nomore-ie8.jpg" style="border: none;" alt="#{i18n['get']} Internet Explorer 8"/></a></div>
+          <div style="width: 73px; float: left;"><a href="#{i18n['safari_url']}" target="_blank"><img src="#{o[:img_host]}ie6nomore-safari.jpg" style="border: none;" alt="#{i18n['get']} Safari 4"/></a></div>
+          <div style="float: left;"><a href="#{i18n['chrome_url']}" target="_blank"><img src="#{o[:img_host]}ie6nomore-chrome.jpg" style="border: none;" alt="#{i18n['get']} Google Chrome"/></a></div>
+         </div>
+        </div>
+        #{close_tag}
+        CODE
       end
       
       
