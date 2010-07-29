@@ -233,9 +233,9 @@ module Sinatra
         close_tag = o[:debug] ? "<!-- DEBUG [endif] -->" : "<![endif]-->"
         
         (<<-CODE).gsub(/^ {4}/, '')
-        
+
         #{start_tag}
-        <div style="border: #{o[:border]}; background: #{o[:background]}; text-align: center; clear: both; height: 75px; position: relative;">
+        <div id="ie6nomore" style="border: #{o[:border]}; background: #{o[:background]}; text-align: center; clear: both; height: 75px; position: relative;">
          <div style="position: absolute; right: 3px; top: 3px; font-family: courier new; font-weight: bold;"><a href="#" onclick="javascript:this.parentNode.parentNode.style.display='none'; return false;"><img src="#{o[:img_host]}ie6nomore-cornerx.jpg" style="border: none;" alt="#{i18n['close']}"/></a></div>
           <div style="width: 640px; margin: 0 auto; text-align: left; padding: 0; overflow: hidden; color: #{o[:text_color]};">
            <div style="width: 75px; float: left;"><img src="#{o[:img_host]}ie6nomore-warning.jpg" alt="Warning!"/></div>
