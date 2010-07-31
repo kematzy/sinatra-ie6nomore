@@ -38,7 +38,7 @@ describe "Sinatra" do
           # remove the comments so we can test the code output
           markup = remove_enclosing_html_comments(body)
           # we get the border and background through OK
-          markup.should match(/<div style="border: 1px solid #F7941D; background: #FEEFDA;/)
+          markup.should match(/<div id="ie6nomore" style="border: 1px solid #F7941D; background: #FEEFDA;/)
           # we have a warning image
           markup.should have_tag('div[@style=width: 75px; float: left;] > img') do |img|
             img.attributes['src'].should == '/images/ie6nomore/ie6nomore-warning.jpg'
@@ -78,11 +78,11 @@ describe "Sinatra" do
         end
         
         it "should set the border style attribute" do 
-          @markup.should match(/<div style="border: 10px dashed #fff; background: yellow;/)
+          @markup.should match(/<div id="ie6nomore" style="border: 10px dashed #fff; background: yellow;/)
         end
         
         it "should set the background style attribute" do 
-          @markup.should match(/<div style="(.*)background: yellow;/)
+          @markup.should match(/<div id="ie6nomore" style="(.*)background: yellow;/)
         end
         
         it "should set the text color style attribute" do 
